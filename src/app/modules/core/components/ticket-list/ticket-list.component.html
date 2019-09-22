@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="tickets?.length > 0; else emptyState">
+    <div class="col" *ngFor="let ticket of tickets">
+
+      <div class="ticket-container">
+        <div class="ticket" betexScaleTicketDirective [class.buy]="ticket.tips?.length <= 0">
+          <h1 class="img-title center-text">VIP</h1>
+          <!--If user owns ticket-->
+          <ng-container *ngIf="ticket.tips?.length > 0">
+            <table align="center" class="img-body pair vip-border col-12 col-sm-10">
+              <tbody>
+              <tr *ngFor="let tip of ticket.tips" class="add-padding">
+                <td>{{tip.teamHome}} - {{tip.teamAway}}</td>
+                <td>{{tip.bet}}</td>
+                <td>{{tip.odds}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <h1 class="img-footer">
+              <strong>Total Odds: {{ticket.odds | number:'.2-2'}}</strong>
+            </h1>
+          </ng-container>
+          <!--if user doesn't own ticket-->
+          <ng-container *ngIf="ticket.tips?.length <= 0">
+            <div class="img-body"><br/>
+              <h1>{{roundDown(ticket.odds)}}+ odds</h1><br/><br/><br/>
+              <h1>{{ticket.price | currency:'EUR'}}</h1>
+            </div>
+            <a class="btn buy-btn img-footer" (click)="onBuyTicket(ticket.id)">Buy Ticket</a>
+          </ng-container>
+        </div>
+        <button *ngIf="user.isAdmin"
+                class="delete" mat-icon-button
+                (click)="openModal(archiveTicketModal)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button *ngIf="user.isAdmin"
+                class="info" mat-icon-button
+                (click)="onFetchTicketOwners(ticket); openUserModal(users);">
+          <mat-icon>info</mat-icon>
+        </button>
+        <ng-template #archiveTicketModal>
+          <div class="modal-body text-center">
+            <p>Archive ticket?</p>
+            <button type="button" class="btn btn-default" (click)="archiveTicketConfirm(ticket.id)">Yes</button>&nbsp;
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+          </div>
+        </ng-template>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<ng-template #emptyState>
+  <div class="martel-font text-center">
+    <h1>No tickets available at the moment</h1>
+  </div>
+</ng-template>
+
+<ng-template #users>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Buyers: {{ticketOwners?.length}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngIf="!fetchingTicketOwner && ticketOwners?.length === 0">No Buyers</ng-container>
+    <ng-container *ngIf="fetchingTicketOwner">Fetching Ticket Owners...</ng-container>
+    <ng-container *ngIf="!fetchingTicketOwner && ticketOwners?.length > 0">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of ticketOwners" class="users">
+          <td>{{user.id}}</td>
+          <td>{{user.username}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+</ng-template>

@@ -1,0 +1,20 @@
+.history {
+  font-family: 'Martel', serif;
+  font-size: 37px;
+  background: linear-gradient(to right bottom, #000000, #bfbfbf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+hr {
+  background-color: #111111;
+  display: block;
+  margin-top: -26px;
+  margin-bottom: 1px;
+  width: 260px;
+  border: 1px solid;
+}
+
+.container {
+  padding: 22px 0;
+}

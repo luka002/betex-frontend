@@ -1,0 +1,41 @@
+<div (window:resize)="onResize()" class="background">
+  <ng-sidebar-container style="position: absolute;">
+    <!-- Sidebar -->
+    <ng-sidebar [(opened)]="opened"
+                [closeOnClickOutside]="true"
+                [animate]="true"
+                [showBackdrop]="true"
+                (onClosed)="onSidebarClosed()">
+      <betex-sidebar
+        (toggleSidebar)="toggleSidebar()"
+        (changeRoute)="onChangeRoute($event)"
+      ></betex-sidebar>
+    </ng-sidebar>
+
+    <!-- Page Content -->
+    <div ng-sidebar-content>
+      <ng-progress
+        [direction]="'ltr+'"
+        [speed]="200"
+        [trickleSpeed]="140"
+        [spinner]="false"
+        [spinnerPosition]="'right'"
+        [thick]="true"
+        [meteor]="false"
+        [color]="'#d9b43f'"
+        [ease]="'linear'"
+        [fixed]="true">
+      </ng-progress>
+
+      <betex-navbar
+        (toggleSidebar)="toggleSidebar()"
+        (changeRoute)="onChangeRoute($event)"
+      ></betex-navbar>
+      <betex-sandbox-badge *ngIf="sandboxService.isSandbox"></betex-sandbox-badge>
+
+      <div class="router">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </ng-sidebar-container>
+</div>

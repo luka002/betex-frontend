@@ -1,0 +1,13 @@
+<div *ngIf="!loading">
+
+  <div class="alert-container">
+    <div *ngIf="accountActive" class="alert alert-success">
+      Congratulations, you have successfully activated your account!
+    </div>
+
+    <div *ngIf="!accountActive" class="alert alert-danger">
+      Unavailable link or incorrect URL.
+    </div>
+  </div>
+
+</div>

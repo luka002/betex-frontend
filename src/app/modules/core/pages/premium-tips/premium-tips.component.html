@@ -1,0 +1,29 @@
+<div *ngIf="becomePremiumClicked" class="backdrop"></div>
+
+<ng-container *ngIf="user.isPremiumOrAdmin">
+  <div class="container title">
+    <h1 class="martel-font center-text">BETex</h1>
+    <hr>
+    <h1 class="martel-font-premium center-text">PREMIUM</h1>
+  </div>
+  <betex-tips-table
+    [tips]="tips"
+    [isUserAdmin]="user.isAdmin"
+    [isHistoryTable]="false"
+    [isPremiumTable]="true"
+    [showSuccessAlert]="showSuccessAlert"
+    [showErrorAlert]="showErrorAlert"
+    (updateTip)="updateTip($event)"
+    (createTicket)="createTicket($event[0], $event[1])"
+  ></betex-tips-table>
+</ng-container>
+
+<div class="become-premium">
+  <betex-become-premium
+    *ngIf="!user.isLoggedIn || user.isRegular"
+    [user]="user"
+    [settings]="settings"
+    (becomePremium)="becomePremium()"
+    (register)="goToRegisterPage()"
+  ></betex-become-premium>
+</div>

@@ -1,0 +1,224 @@
+<div class="my-container">
+  <div class="center-text">
+    <h2 *ngIf="formType === FormType.REGISTER">Registration Form</h2>
+    <h2 *ngIf="formType === FormType.ADD_USER">Add User</h2>
+    <h2 *ngIf="formType === FormType.EDIT_USER">Edit User</h2>
+    <hr>
+  </div>
+
+  <ng-container *ngIf="formType === FormType.REGISTER">
+    <betex-google-login-button
+      [forSignIn]="false"
+      (click)="onSignUpWithGoogle()"
+    ></betex-google-login-button>
+    <betex-facebook-login-button
+      [forSignIn]="false"
+      (click)="onSignUpWithFacebook()"
+    ></betex-facebook-login-button>
+    <hr class="below-social-buttons">
+  </ng-container>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSaveUser()" novalidate>
+    <!--Username-->
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" formControlName="username" class="form-control"
+             [class.input-invalid]="isInvalidAndDirty('username') && !userForm.pending">
+      <div class="red" *ngIf="hasError('username', 'required')">
+        Username is required
+      </div>
+      <div class="red" *ngIf="hasError('username', 'minlength')">
+        Username must be at least 2 characters long
+      </div>
+      <div class="red" *ngIf="hasError('username', 'maxlength')">
+        Username can not be longer than 30 characters
+      </div>
+      <div class="red" *ngIf="hasError('username', 'usernameTaken')">
+        Username is already taken
+      </div>
+      <div class="red" *ngIf="hasError('username', 'pattern')">
+        Username can only have alphanumerical characters, hyphens and underscores
+      </div>
+    </div>
+
+    <!--Password-->
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" formControlName="password" class="form-control"
+             [ngClass]="{ 'input-invalid': isInvalidAndDirty('password') }">
+      <div class="red" *ngIf="hasError('password', 'required')">
+        Password is required
+      </div>
+      <div class="red" *ngIf="hasError('password', 'minlength')">
+        Password has to be at least 8 characters long
+      </div>
+    </div>
+
+    <!--Confirm Password-->
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" formControlName="confirmPassword" class="form-control"
+             [ngClass]="{ 'input-invalid': isInvalidAndDirty('confirmPassword') }">
+      <div class="red" *ngIf="hasError('confirmPassword', 'required')">
+        Confirm password is required
+      </div>
+      <div class="red" *ngIf="hasError('confirmPassword', 'mustMatch')">
+        Passwords not matching
+      </div>
+    </div>
+
+    <!--Edit password checkbox-->
+    <div *ngIf="formType === FormType.EDIT_USER" class="check-box validate-password-check-box">
+      <mat-checkbox
+        formControlName="doValidatePassword"
+        color="primary"
+        (change)="checkBoxClicked()"
+      ></mat-checkbox>
+      <label>Change Current Password</label>
+    </div>
+
+    <!--Email-->
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" formControlName="email" class="form-control"
+             [ngClass]="{ 'input-invalid': isInvalidAndDirty('email') && !userForm.pending }">
+      <div class="red" *ngIf="hasError('email', 'required')">
+        Email is required
+      </div>
+      <div class="red" *ngIf="hasError('email', 'email')">
+        Please enter valid email address
+      </div>
+      <div class="red" *ngIf="hasError('email', 'emailTaken')">
+        Provided email already exists
+      </div>
+    </div>
+
+    <!--Social Auth Message-->
+    <div *ngIf="socialAuthError" class="alert alert-danger center-text">
+      {{socialAuthFailMessage}}
+    </div>
+
+    <!--Terms of agreement-->
+    <div *ngIf="formType === FormType.REGISTER" class="check-box">
+      <mat-checkbox formControlName="termsOfAgreement" color="primary"></mat-checkbox>
+      <label>
+        I accept <a href (click)="openModal($event, template)">terms of agreement</a>
+      </label>
+    </div>
+
+    <div *ngIf="formType !== FormType.REGISTER">
+      <!--User Role-->
+      <div class="form-group">
+        <label>UserRole</label>
+        <div class="input-group">
+          <select [formControlName]="'role'" class="custom-select"
+                  [ngClass]="{ 'input-invalid': isInvalidAndDirty('role') }">
+            <option value="REGULAR">REGULAR</option>
+            <option value="PREMIUM">PREMIUM</option>
+            <option value="ADMIN">ADMIN</option>
+          </select>
+        </div>
+        <div class="red" *ngIf="hasError('role', 'required')">
+          UserRole is required
+        </div>
+      </div>
+
+      <!--Enabled-->
+      <div class="form-group">
+        <label>Enabled</label>
+        <div class="input-group">
+          <select [formControlName]="'enabled'" class="custom-select"
+                  [ngClass]="{ 'input-invalid': isInvalidAndDirty('enabled') }">
+            <option value="true">YES</option>
+            <option value="false">NO</option>
+          </select>
+        </div>
+        <div class="red" *ngIf="hasError('enabled', 'required')">
+          Enabled is required
+        </div>
+      </div>
+
+      <!--Social name-->
+      <div class="form-group" *ngIf="user && user.socialName">
+        <label>Social Name</label>
+        <input type="text" formControlName="socialName" class="form-control"
+               [ngClass]="{ 'input-invalid': isInvalidAndDirty('socialName') && !userForm.pending }">
+        <div class="red" *ngIf="hasError('socialName', 'required')">
+          Social name is required
+        </div>
+      </div>
+
+      <!--Last Payment-->
+      <div class="form-group">
+        <label>Last Payment</label>
+        <div>
+          <input type="datetime-local" formControlName="lastPaymentTime" class="form-control">
+        </div>
+      </div>
+
+      <!--Premium Expiry-->
+      <div class="form-group">
+        <label>Premium Expiry</label>
+        <div>
+          <input type="datetime-local" formControlName="premiumExpiryTime" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <!--Message after submission-->
+    <ng-container *ngIf="formSubmitted && !loading">
+      <div *ngIf="!userSaved" class="form-group fill-row alert alert-danger mar-top-30">
+        <ng-container *ngIf="formType === FormType.REGISTER">
+          Registration failed. Please check if all the fields are properly filled and
+          if they are please contact us on our email betextips@gmail.com. Thank you for understanding.
+        </ng-container>
+        <ng-container *ngIf="formType !== FormType.REGISTER">
+          An error occurred
+        </ng-container>
+      </div>
+
+      <div *ngIf="userSaved" class="form-group fill-row alert alert-success mar-top-30">
+        <ng-container *ngIf="formType === FormType.REGISTER">
+          Registration Successful
+        </ng-container>
+        <ng-container *ngIf="formType === FormType.EDIT_USER">
+          User successfully updated
+        </ng-container>
+        <ng-container *ngIf="formType === FormType.ADD_USER">
+          New user created
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <div class="form-group" style="margin-top: 30px">
+      <button type="submit" [disabled]="!userForm.valid || loading" class="btn btn-dark fill-row">
+        <ng-container *ngIf="formType === FormType.REGISTER">Register</ng-container>
+        <ng-container *ngIf="formType === FormType.ADD_USER">Add User</ng-container>
+        <ng-container *ngIf="formType === FormType.EDIT_USER">Edit User</ng-container>
+      </button>
+    </div>
+  </form>
+</div>
+
+
+<!--Modal terms of agreement-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Terms of agreement</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6>{{termsOfAgreement.title}}</h6>
+    <p>{{termsOfAgreement.p1}}</p>
+    <p>{{termsOfAgreement.p2}}</p>
+    <p>{{termsOfAgreement.p3}}</p>
+    <p>{{termsOfAgreement.p4}}</p>
+    <p>{{termsOfAgreement.p5}}</p>
+    <p>{{termsOfAgreement.p6}}</p>
+    <p>{{termsOfAgreement.p7}}</p>
+    <p>{{termsOfAgreement.p8}}</p>
+    <button type="button" class="btn btn-dark btn-block" (click)="modalRef.hide()">OK</button>
+  </div>
+</ng-template>

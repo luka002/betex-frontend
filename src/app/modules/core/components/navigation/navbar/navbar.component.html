@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand navbar-dark navbar-custom">
+  <div class="collapse navbar-collapse" *ngIf="user">
+    <ul *ngIf="!responsiveService.isMobile()" class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link list-item" (click)="changeRoute.emit(NavRoute.FREE_TIPS)">Free Tips</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="changeRoute.emit(NavRoute.TICKETS)">Tickets</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-vip" (click)="changeRoute.emit(NavRoute.PREMIUM_TIPS)">PREMIUM</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link list-item" (click)="changeRoute.emit(NavRoute.ABOUT)">About</a>
+      </li>
+      <ng-container *ngIf="user.isAdmin">
+        <li class="nav-item">
+          <a class="nav-link list-item" (click)="changeRoute.emit(NavRoute.ADD_TIP)">Add Tip</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link list-item" (click)="changeRoute.emit(NavRoute.ADD_USER)">Add User</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link list-item" (click)="changeRoute.emit(NavRoute.MANAGE_USERS)">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link list-item" (click)="changeRoute.emit(NavRoute.SETTINGS)">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link list-item" (click)="changeRoute.emit(NavRoute.HISTORY)">History</a>
+        </li>
+      </ng-container>
+    </ul>
+
+    <ul *ngIf="responsiveService.isMobile()" class="navbar-nav mr-auto">
+      <li class="nav-item menu-btn" (click)="toggleSidebar.emit();">
+        <div></div>
+        <div></div>
+        <div></div>
+      </li>
+    </ul>
+
+    <div *ngIf="user.isLoggedIn">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link list-item" (click)="changeRoute.emit(NavRoute.PROFILE)">
+            {{(user.username.length > 30) ? (user.username | slice:0:30) + '...' : (user.username)}}
+          </a>
+        </li>
+        <li *ngIf="!responsiveService.isMobile()" class="nav-item mar-lef-6">
+          <button type="button" class="btn btn-outline-warning"
+                  (click)="changeRoute.emit(NavRoute.LOGOUT)">Logout</button>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!user.isLoggedIn">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <button type="button" class="btn btn-outline-light"
+                  (click)="changeRoute.emit(NavRoute.USER_LOGIN)">Login</button>
+        </li>
+        <li class="nav-item mar-lef-6">
+          <button type="button" class="btn btn-outline-light"
+                  (click)="changeRoute.emit(NavRoute.REGISTER)">Register</button>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>

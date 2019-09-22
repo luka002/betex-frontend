@@ -1,0 +1,91 @@
+<div class="sidebar">
+  <ul (touchstart)="confirmTouchScreen()">
+    <li class="nothing-on-hover">
+      <label class="b" (click)="onChangeRoute(NavRoute.FREE_TIPS)">B</label>
+    </li>
+    <li (press)="pressed(NavRoute.FREE_TIPS)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.FREE_TIPS)"
+        (click)="onChangeRoute(NavRoute.FREE_TIPS)">
+      <a>Free</a>
+    </li>
+    <li (press)="pressed(NavRoute.TICKETS)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.TICKETS)"
+        (click)="onChangeRoute(NavRoute.TICKETS)">
+      <a>Tickets</a>
+    </li>
+    <li (press)="pressed(NavRoute.PREMIUM_TIPS)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.PREMIUM_TIPS)"
+        (click)="onChangeRoute(NavRoute.PREMIUM_TIPS)">
+      <a>PREMIUM</a>
+    </li>
+    <li (press)="pressed(NavRoute.ABOUT)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.ABOUT)"
+        (click)="onChangeRoute(NavRoute.ABOUT)">
+      <a>About</a>
+    </li>
+    <li *ngIf="user.isLoggedIn"
+        (press)="pressed(NavRoute.PROFILE)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.PROFILE)"
+        (click)="onChangeRoute(NavRoute.PROFILE)">
+      <a>Profile</a>
+    </li>
+    <li *ngIf="user.isAdmin"
+        (press)="pressed(NavRoute.ADD_TIP)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.ADD_TIP)"
+        (click)="onChangeRoute(NavRoute.ADD_TIP)">
+      <a>Add Tip</a>
+    </li>
+    <li *ngIf="user.isAdmin"
+        (press)="pressed(NavRoute.ADD_USER)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.ADD_USER)"
+        (click)="onChangeRoute(NavRoute.ADD_USER)">
+      <a>Add User</a>
+    </li>
+    <li *ngIf="user.isAdmin"
+        (press)="pressed(NavRoute.MANAGE_USERS)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.MANAGE_USERS)"
+        (click)="onChangeRoute(NavRoute.MANAGE_USERS)">
+      <a>Users</a>
+    </li>
+    <li *ngIf="user.isAdmin"
+        (press)="pressed(NavRoute.SETTINGS)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.SETTINGS)"
+        (click)="onChangeRoute(NavRoute.SETTINGS)">
+      <a>Settings</a>
+    </li>
+    <li *ngIf="user.isAdmin"
+        (press)="pressed(NavRoute.HISTORY)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.HISTORY)"
+        (click)="onChangeRoute(NavRoute.HISTORY)">
+      <a>History</a>
+    </li>
+    <li *ngIf="user.isLoggedIn"
+        (press)="pressed(NavRoute.LOGOUT)"
+        (touchmove)="unPressed()"
+        (touchend)="unPressed()"
+        [ngClass]="getTouchClasses(NavRoute.LOGOUT)"
+        (click)="onChangeRoute(NavRoute.LOGOUT)">
+      <a id="logout">Logout</a>
+    </li>
+  </ul>
+</div>

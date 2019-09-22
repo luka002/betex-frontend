@@ -1,0 +1,65 @@
+<button *ngIf="!isTicketShown" mat-icon-button class="no-outline w-40"
+        (click)="$event.stopPropagation(); onFillImageData(tip)" [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<button *ngIf="isTicketShown" mat-icon-button class="no-outline w-40"
+        (click)="$event.stopPropagation(); onAddToTicket(tip);">
+  <mat-icon>add</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button *ngIf="tipNotActive(tip)" class="no-outline"
+          mat-menu-item (click)="editNonActiveTip()">
+    Edit
+  </button>
+  <button *ngIf="!tipNotActive(tip)" class="no-outline"
+          mat-menu-item (click)="editActiveTip()">
+    Edit
+  </button>
+  <button *ngIf="!tipNotActive(tip)" class="no-outline"
+          mat-menu-item (click)="setResult()">
+    Set Result
+  </button>
+  <button *ngIf="tipNotActive(tip)" class="no-outline"
+          mat-menu-item (click)="openModal(result)">
+    Unset Result
+  </button>
+  <button class="no-outline" mat-menu-item
+          (click)="onDownloadImage(tip)">
+    Download
+  </button>
+  <button *ngIf="!isHistory" class="no-outline red"
+          mat-menu-item (click)="openModal(history)">
+    Archive
+  </button>
+  <button *ngIf="isHistory" class="no-outline red"
+          mat-menu-item (click)="openModal(toExpired)">
+    Remove
+  </button>
+</mat-menu>
+
+
+<ng-template #result>
+  <div class="modal-body text-center">
+    <p><strong>{{tip.teamHome + ' VS ' + tip.teamAway}}</strong></p>
+    <p>Unset result?</p>
+    <a class="btn btn-danger" (click)="unsetResultConfirm()">Unset</a>
+    <a class="btn btn-primary margin-left-5" (click)="decline()">Cancel</a>
+  </div>
+</ng-template>
+<ng-template #history>
+  <div class="modal-body text-center">
+    <p><strong>{{tip.teamHome + ' VS ' + tip.teamAway}}</strong></p>
+    <p>Move to history?</p>
+    <a class="btn btn-danger" (click)="toHistoryConfirm()">Move</a>
+    <a class="btn btn-primary margin-left-5" (click)="decline()">Cancel</a>
+  </div>
+</ng-template>
+<ng-template #toExpired>
+  <div class="modal-body text-center">
+    <p><strong>{{tip.teamHome + ' VS ' + tip.teamAway}}</strong></p>
+    <p>Remove tip?</p>
+    <a class="btn btn-danger" (click)="removeConfirm()">Remove</a>
+    <a class="btn btn-primary margin-left-5" (click)="decline()">Cancel</a>
+  </div>
+</ng-template>

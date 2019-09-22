@@ -1,0 +1,37 @@
+<div class="wrapper">
+  <button class="btn btn-dark"
+          *ngIf="selectedTab === ticketType.REGULAR"
+          (click)="onForInstagram()">
+    Download Regular
+  </button>
+  <button class="btn btn-dark"
+          *ngIf="selectedTab === ticketType.DAILY"
+          (click)="onForInstagram()">
+    Download Daily
+  </button>
+  <ng-container *ngIf="selectedTab === ticketType.PREMIUM">
+    <form (ngSubmit)="openModal(confirmTicketModal)" #f="ngForm">
+      <div class="my-row">
+        <div class="input-group first-col">
+          <input type="number" class="form-control" placeholder="Price" #priceInput="ngModel"
+                 name="price" [(ngModel)]="price" required (change)="validatePrice()">
+          <div class="input-group-append">
+            <span class="input-group-text">€</span>
+          </div>
+        </div>
+        <button class="btn btn-dark"
+                [disabled]="!f.valid || priceInput.value <= 0 || isTicketEmpty || loading">
+          Create Premium Ticket
+        </button>
+      </div>
+    </form>
+  </ng-container>
+</div>
+
+<ng-template #confirmTicketModal>
+  <div class="modal-body text-center">
+    <p>Create ticket with odds: {{totalOdds | number:'1.2-2'}} and price: {{price}}?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>&nbsp;
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>

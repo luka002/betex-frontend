@@ -1,0 +1,18 @@
+.my-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.tab-selected {
+  color: black;
+  background-color: rgba(100, 100, 100, 0.25);
+}
+
+mat-button-toggle {
+  border-bottom: 2px solid silver;
+}
+
+mat-button-toggle-group {
+  margin-top: 20px;
+}

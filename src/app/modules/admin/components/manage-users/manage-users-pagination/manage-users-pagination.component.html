@@ -1,0 +1,46 @@
+<div class="wrapper-space-between">
+  <div>
+    <button type="button" class="btn btn-outline-success"
+            (click)="setPage(1)">
+      First Page
+    </button>
+    <button type="button" class="btn btn-outline-info mar-hor-3"
+            (click)="previousPage()">
+      Previous
+    </button>
+  </div>
+
+  <div class="wrapper-pages">
+    <div *ngFor="let i of availablePages()">
+      <button type="button" class="btn btn-outline-primary"
+              (click)="setPage(i)"
+              [ngClass]="{'active': i == page.currentPage}">
+        {{i}}
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <button type="button" class="btn btn-outline-info mar-hor-3"
+            (click)="nextPage()">
+      Next
+    </button>
+    <button type="button" class="btn btn-outline-success"
+            (click)="setPage(page.lastPage)">
+      Last Page
+    </button>
+  </div>
+</div>
+
+<hr>
+<div class="wrapper-space-between">
+  <form class="form-inline wrapper-no-wrap" (ngSubmit)="goToPage(pageNum)">
+    <input class="form-control" type="text" #pageNum placeholder="Go To Page"/>
+    <button type="submit" class="btn btn-secondary mar-hor-3">Go</button>
+  </form>
+
+  <form class="form-inline wrapper-no-wrap" (ngSubmit)="search(username)">
+    <input class="form-control" type="text" #username placeholder="Find User"/>
+    <button type="submit" class="btn btn-secondary mar-hor-3">Search</button>
+  </form>
+</div>

@@ -1,0 +1,23 @@
+.login {
+  font-family: 'Quicksand', sans-serif;
+  width: 320px;
+  max-width: calc(100% - 20px);
+  padding: 20px 10px 10px 10px;
+  margin-top: 100px;
+  background: rgba(100, 100, 100, 0.1);
+  border-radius: 5px;
+  border: rgba(0, 0, 0, 0.1) solid 1px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px
+  }
+
+  .sign-in {
+    margin-top: 25px;
+  }
+
+  .fp-mar-top {
+    margin-top: 10px;
+  }
+}

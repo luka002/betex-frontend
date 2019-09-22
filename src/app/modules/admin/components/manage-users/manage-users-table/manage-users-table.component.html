@@ -1,0 +1,50 @@
+<table class="table no-wrap">
+  <thead>
+  <tr>
+    <th class="extra-small-screen">ID</th>
+    <th class="medium-screen">Username</th>
+    <th class="medium-screen">Social Name</th>
+    <th class="small-screen">Name</th>
+    <th class="extra-small-screen">Email</th>
+    <th class="medium-screen">UserRole</th>
+    <th class="medium-screen">Enabled</th>
+    <th class="large-screen">Last Payment</th>
+    <th class="large-screen">Premium Expiry</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of page.users">
+    <td class="extra-small-screen">{{user.id}}</td>
+    <td class="cell medium-screen">{{user.username}}</td>
+    <td class="cell medium-screen">{{user.socialName}}</td>
+    <td class="cell small-screen">{{user.socialName ? user.socialName : user.username}}</td>
+    <td class="cell extra-small-screen">{{user.email}}</td>
+    <td class="medium-screen">{{user.userRole.role}}</td>
+    <td class="medium-screen">{{user.enabled}}</td>
+    <td class="large-screen">{{user.lastPaymentTime | date:'d/M/yy, H:mm'}}</td>
+    <td class="large-screen">{{user.premiumExpiryTime| date:'d/M/yy, H:mm'}}</td>
+    <td [style.padding]="'4px'">
+      <button mat-icon-button class="no-outline" [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button class="no-outline" mat-menu-item (click)="onEditUser(user)">
+          Edit
+        </button>
+        <button class="no-outline red" mat-menu-item (click)="openModal(deleteUser)">
+          Delete
+        </button>
+      </mat-menu>
+      <ng-template #deleteUser>
+        <div class="modal-body text-center">
+          <p>Delete user <strong>{{user.socialName || user.username}}</strong>?</p>
+          <a class="btn btn-danger" (click)="confirmDeleteUser(user)">Delete</a>
+          <a class="btn btn-primary margin-left-5" (click)="decline()">Cancel</a>
+        </div>
+      </ng-template>
+    </td>
+  </tr>
+  </tbody>
+</table>
+

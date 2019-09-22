@@ -1,0 +1,37 @@
+<betex-new-ticket-header
+  [selectedTab]="selectedTab"
+  (clearTicket)="clear()"
+  (closeTicket)="close()"
+  (toggleTab)="toggleTab($event)"
+  (toggleStatus)="toggleShowStatus()"
+></betex-new-ticket-header>
+
+<betex-new-ticket-preview
+  [selectedTab]="selectedTab"
+  [tipsList]="tipsList"
+  [totalOdds]="totalOdds"
+  [winRate]="winRate"
+  [showStatus]="showStatus"
+  (removeTip)="removeTip($event)"
+></betex-new-ticket-preview>
+
+<div *ngIf="showSuccessAlert" class="alert alert-success text-center" role="alert">
+  Ticket successfully created!
+</div>
+<div *ngIf="showErrorAlert" class="alert alert-danger text-center" role="alert">
+  <ol>
+    <li>Ticket must have at least 1 tip</li>
+    <li>Price has to be more than 0€</li>
+    <li>Min 15 min before first match starts</li>
+    <li>Tip can not be on more than 1 ticket</li>
+  </ol>
+</div>
+
+<betex-new-ticket-footer
+  [selectedTab]="selectedTab"
+  [totalOdds]="totalOdds"
+  [isTicketEmpty]="tipsList.size === 0"
+  [loading]="loading"
+  (forInstagram)="forInstagram()"
+  (forPurchase)="onForPurchase($event)"
+></betex-new-ticket-footer>

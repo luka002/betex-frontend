@@ -1,0 +1,68 @@
+@media (max-width: 1300px) {
+  .large-screen {
+    display: none;
+  }
+}
+
+.small-screen {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .medium-screen {
+    display: none;
+  }
+  .small-screen {
+    display: table-cell;
+  }
+}
+
+@media (max-width: 700px) {
+  .extra-small-screen {
+    display: none;
+  }
+}
+
+.cell {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:hover {
+    max-width: inherit;
+    overflow: inherit;
+  }
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+tr:hover {
+  background: rgba(150, 150, 150, 0.3) !important;
+}
+
+table {
+  font-family: 'Quicksand', sans-serif;
+
+  thead > tr > th {
+    border-top: 1px solid #b1b1b1;
+    border-bottom: 1px solid #b1b1b1;
+  }
+
+  tbody > tr > td {
+    border-bottom: 1px solid #b1b1b1;
+  }
+}
+
+.red {
+  color: red;
+}
+
+.margin-left-5 {
+  margin-left: 5px;
+}
+
+.modal-body a {
+  color: white
+}

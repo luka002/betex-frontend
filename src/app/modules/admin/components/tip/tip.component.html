@@ -1,0 +1,124 @@
+<div class="my-container col-12">
+  <form [formGroup]="tipForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Team Home</label>
+      <div class="col-sm-9">
+        <input (input)="fieldChange()" type="text" formControlName="teamHome" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Team Away</label>
+      <div class="col-sm-9">
+        <input (input)="fieldChange()" type="text" formControlName="teamAway" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">League</label>
+      <div class="col-sm-9">
+        <input (input)="fieldChange()" type="text" formControlName="league" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Time</label>
+      <div class="col-sm-9">
+        <input (input)="fieldChange()" type="datetime-local" formControlName="time" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Odds</label>
+      <div class="col-sm-9">
+        <input (input)="fieldChange()" type="text" formControlName="odds" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Bet</label>
+      <div class="col-sm col">
+        <input (input)="fieldChange()" type="text" formControlName="bet" class="form-control">
+      </div>
+      <div class="col-sm-auto col-auto" dropdown [style.paddingLeft]="0">
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-dark dropdown-toggle"
+                aria-controls="dropdown-alignment">
+        </button>
+        <ul id="dropdown-alignment" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+            role="menu" aria-labelledby="button-basic">
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('1')">1</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('2')">2</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('1x')">1x</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('x2')">x2</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('BTS')">BTS</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('t1 2+')">t1 2+</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('t2 3+')">t2 3+</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('Over 1.5')">Over 1.5</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('Over 2.5')">Over 2.5</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="setBet('EH 0 - 1 / 1')">EH 0 - 1 / 1</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Type</label>
+      <div class="col-sm-9">
+        <div class="input-group mb-3">
+          <select (input)="fieldChange()" [formControlName]="'type'" class="custom-select">
+            <option value="FREE">FREE</option>
+            <option value="PREMIUM">PREMIUM</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="useResultFields" [style.marginTop]="'-16px'">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Result</label>
+        <div class="col-sm-9">
+          <input (input)="fieldChange()" type="text" formControlName="result" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Status</label>
+        <div class="col-sm-9">
+          <div class="input-group mb-3">
+            <select (input)="fieldChange()" [formControlName]="'status'" class="custom-select">
+              <option value="WIN">WIN</option>
+              <option value="LOSS">LOSS</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="sandboxService.isSandbox" [style.marginBottom]="'8px'">
+      <button type="button" class="btn btn-primary fill-row" [style.margin]="0" (click)="fillFormWithMockData()">
+        Random Fill
+      </button>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" [disabled]="!tipForm.valid || loading" class="btn btn-outline-dark fill-row">
+        <span *ngIf="!editMode && !useResultFields">Save Tip</span>
+        <span *ngIf="editMode">Edit Tip</span>
+        <span *ngIf="!editMode && useResultFields">Set as Finished</span>
+      </button>
+    </div>
+
+    <ng-container *ngIf="submitted && !loading">
+      <div *ngIf="saveSuccess" class="alert alert-success">
+        <span *ngIf="!editMode && !useResultFields">Tip has been <strong>successfully</strong> saved!</span>
+        <span *ngIf="editMode">Tip has been <strong>successfully</strong> edited!</span>
+        <span *ngIf="!editMode && useResultFields">Tip has been <strong>successfully</strong> set as finished!</span>
+      </div>
+
+      <div *ngIf="!saveSuccess" class="alert alert-danger">
+        <span *ngIf="!editMode && !useResultFields">Tip has <strong>NOT</strong> been saved!</span>
+        <span *ngIf="editMode">Tip has <strong>NOT</strong> been edited!</span>
+        <span *ngIf="!editMode && useResultFields"> Tip has <strong>NOT</strong> been set as finished!</span>
+      </div>
+    </ng-container>
+  </form>
+</div>

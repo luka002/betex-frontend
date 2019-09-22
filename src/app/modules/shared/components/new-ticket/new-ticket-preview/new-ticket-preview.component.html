@@ -1,0 +1,53 @@
+<div class="ticket-container">
+  <div #ticket class="ticket" betexScaleTicketDirective>
+    <h3 class="img-title">
+      <strong *ngIf="selectedTab === ticketType.REGULAR">Please like & follow</strong>
+      <strong *ngIf="selectedTab === ticketType.DAILY">{{date | date}}</strong>
+    </h3>
+    <div class="img-title top-90">
+      <h1 *ngIf="selectedTab === ticketType.PREMIUM" class="martel-font-vip center-text">VIP</h1>
+    </div>
+
+    <table align="center" class="img-body pair vip-border col-12 col-sm-10"
+           [ngClass]="{'img-body-premium': selectedTab === ticketType.PREMIUM}">
+      <tbody>
+      <tr *ngFor="let tip of tipsList"
+          (click)="onRemoveTip(tip)"
+          [ngClass]="{'add-padding': selectedTab !== ticketType.DAILY}">
+        <td>{{tip.teamHome}} - {{tip.teamAway}}</td>
+        <td>{{tip.bet}}</td>
+        <td>{{tip.odds}}</td>
+        <td *ngIf="showStatus && tip.status; then win"></td>
+        <td *ngIf="showStatus && !tip.status; then loss"></td>
+        <td class="remove"><h2><strong>REMOVE</strong></h2></td>
+      </tr>
+      <!--Because of html2Canvas bug where border-bottom is not recognized-->
+      <tr class="html-2-canvas-fix"></tr>
+      </tbody>
+    </table>
+
+    <h1 *ngIf="selectedTab !== ticketType.DAILY" class="img-footer">
+      <strong>Total Odds: {{totalOdds | number:'.2-2'}}</strong>
+    </h1>
+    <h1 *ngIf="selectedTab === ticketType.DAILY" class="img-footer percent">
+      <strong>Win Rate: {{winRate | percent}}</strong>
+    </h1>
+  </div>
+</div>
+
+<ng-template #win>
+  <td>
+    <img [width]="24"
+         [height]="24"
+         [alt]="'Success'"
+         src="../../../../../../assets/images/green_arrow.png">
+  </td>
+</ng-template>
+<ng-template #loss>
+  <td>
+    <img [width]="24"
+         [height]="24"
+         [alt]="'Failed'"
+         src="../../../../../../assets/images/red_cross.png">
+  </td>
+</ng-template>

@@ -1,0 +1,36 @@
+<h1 class="title-font center-text">Average Monthly Stats</h1>
+
+<div class="container-fluid text-center main-content">
+  <div class="row">
+    <div class="col-sm column-1">
+      <img src="../../../../../assets/images/growing_bar2.png" alt="growing bar">
+      <h2>WIN RATE</h2>
+      <h1>65+%</h1>
+    </div>
+    <div class="col-sm column-2">
+      <img src="../../../../../assets/images/dice2.png" alt="dice">
+      <h2>AVERAGE ODDS</h2>
+      <h1>1.70</h1>
+    </div>
+    <div class="col-sm column-3">
+      <img src="../../../../../assets/images/euro_sign4.png" alt="euro">
+      <h2>AVERAGE PROFIT</h2>
+      <h1>1000€</h1>
+    </div>
+  </div>
+</div>
+
+<div class="text-center buy-btn-container">
+    <ng-container *ngIf="settings && !settings.buyingEnabled; then buyingDisabled; else buyingEnabled">
+    </ng-container>
+</div>
+
+
+<ng-template #buyingEnabled>
+  <h4 *ngIf="user.isLoggedIn">Get access to all premium tips for the duration of one month</h4>
+  <a class="btn buy-btn" (click)="onButtonClick()">{{user.isLoggedIn ? 'Buy Premium!' : 'Become Premium'}}</a>
+  <h3 *ngIf="user.isLoggedIn">{{settings.weekendPrice | currency:'EUR'}}</h3>
+</ng-template>
+<ng-template #buyingDisabled>
+  <h1 class="disabled-msg">{{settings.buyingDisabledMessage}}</h1>
+</ng-template>

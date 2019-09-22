@@ -1,0 +1,11 @@
+<div class="tip-container">
+  <betex-tip
+    *ngIf="tip !== null"
+    [tip]="tip"
+    [editMode]="editMode"
+    [useResultFields]="useResultFields"
+    [loading]="loading"
+    [saveSuccess]="saveSuccess"
+    (saveTip)="saveTip($event)"
+  ></betex-tip>
+</div>

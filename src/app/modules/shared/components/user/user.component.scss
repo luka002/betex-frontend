@@ -1,0 +1,46 @@
+.my-container {
+  padding: 20px;
+  background: rgba(100, 100, 100, 0.1);
+  border-radius: 5px;
+  border: rgba(0, 0, 0, 0.1) solid 1px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.input-invalid {
+  border: 1px solid red;
+}
+
+.red {
+  color: red;
+}
+
+hr {
+  margin: -7px 29px 20px 29px;
+}
+
+.bellow-social-buttons {
+  margin: 20px auto 10px;
+  width: 250px;
+}
+
+.check-box {
+  margin: -6px 0 -26px;
+  display: flex;
+  align-items: center;
+
+  label {
+    margin-left: 8px;
+  }
+}
+
+.validate-password-check-box {
+  margin: -14px 0 4px;
+}
+
+.modal-body p {
+  font-size: 12px;
+}
+
+.mar-top-30 {
+  margin-top: 30px;
+}

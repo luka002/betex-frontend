@@ -1,0 +1,113 @@
+.ticket-container {
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.ticket {
+  position: relative;
+  text-align: center;
+  width: 586px;
+  height: 586px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #000;
+  background-color: #d7d7d7;
+}
+
+.col {
+  padding: 0;
+  margin: 0 10px;
+}
+
+.buy {
+  background: #ADA996;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ADA996, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.delete {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  outline: none;
+}
+
+.info {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  outline: none;
+}
+
+.img-title{
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Martel', serif;
+  font-size: 130px;
+  background:
+    radial-gradient(
+      ellipse farthest-corner at right bottom,
+      #b3a91f 0%, #bb9f20 8%, #b4892d 30%, #997a34 40%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse farthest-corner at left top,
+      #919191 0%, #a4a46f 8%, #8e7a44 25%, #9b7b34 62.5%, #5d4a1f 100%
+    );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.img-body {
+  width: 500px;
+  font-family: 'Martel', serif;
+  font-weight: bold;
+  position: absolute;
+  top: 54%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  h1 {
+    font-weight: bold;
+  }
+}
+
+.img-footer {
+  font-family: 'Martel', serif;
+  position: absolute;
+  white-space: nowrap;
+  bottom: -10px;
+  color: #000000;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+
+td {
+  font-size: 22px;
+  font-family: 'Martel', serif;
+  font-weight: bold;
+}
+
+.users td {
+  font-size: 14px;
+}
+
+.add-padding td {
+  padding: 20px 0;
+}
+
+.buy-btn {
+  background-color: #bb953f;
+  border-radius: 45px;
+  color: white !important;
+  font-family: 'Martel', serif;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 15px 55px 10px 55px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(120, 105, 44, 0.71) !important;
+  }
+}

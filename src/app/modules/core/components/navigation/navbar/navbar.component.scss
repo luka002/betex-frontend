@@ -1,0 +1,66 @@
+.navbar-custom {
+  background: linear-gradient(to bottom, #111111, #545454);
+}
+
+a {
+  color: gray;
+
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.menu-btn {
+  cursor: pointer;
+
+  div {
+    width: 35px;
+    height: 2px;
+    background-color: silver;
+    margin: 6px 0;
+  }
+
+  &:hover div {
+    background-color: white;
+  }
+}
+
+.nav-vip {
+  position: relative;
+  bottom: -2px;
+  font-weight: bold;
+  font-family: 'Martel', serif;
+  font-size: 17px;
+  background:
+    radial-gradient(
+      ellipse farthest-corner at right bottom,
+      #fef02d 0%, #fdd72b 8%, #e0aa38 30%, #bc9640 40%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse farthest-corner at left top,
+      #ffffff 0%, #ffffac 8%, #e0c16b 25%, #9b7b34 62.5%, #5d4a1f 100%
+    );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-vip:hover {
+  background:
+    radial-gradient(
+      ellipse farthest-corner at right bottom,
+      #e6c632 0%, #cd9628 8%, #fdc140 30%, #f9c555 40%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse farthest-corner at left top,
+      #c9c9c9 0%, #c0c082 8%, #fcd878 25%, #ffca57 62.5%, #5d4a1f 100%
+    );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mar-lef-6 {
+  margin-left: 6px;
+}

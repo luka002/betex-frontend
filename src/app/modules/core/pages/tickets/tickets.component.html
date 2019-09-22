@@ -1,0 +1,28 @@
+<div *ngIf="buyTicketClicked" class="backdrop"></div>
+
+<div *ngIf="user.isLoggedIn">
+  <div class="container title">
+    <h1 class="martel-font center-text">BETex</h1>
+    <hr>
+    <h1 class="martel-font-ticket center-text">TICKETS</h1>
+  </div>
+
+  <betex-ticket-list
+    [tickets]="tickets"
+    [user]="user"
+    [ticketOwners]="ticketOwners"
+    [fetchingTicketOwner]="fetchingTicketOwners"
+    (buyTicket)="buyTicket($event)"
+    (fetchTicketOwners)="fetchTicketOwners($event)"
+    (archiveTicket)="archiveTicket($event)"
+  ></betex-ticket-list>
+</div>
+
+
+<div class="become-premium">
+  <betex-become-premium
+    *ngIf="!user.isLoggedIn"
+    [user]="user"
+    (register)="goToRegisterPage()"
+  ></betex-become-premium>
+</div>

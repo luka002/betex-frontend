@@ -1,0 +1,42 @@
+.img-container {
+  text-align: center;
+  overflow-x: hidden;
+  position: absolute;
+  opacity: 0.0;
+  top: 0;
+  z-index: -10;
+}
+
+.img-title {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img-body {
+  font-family: 'Martel', serif;
+  font-weight: bold;
+  position: absolute;
+  left: 10%;
+  text-align: left;
+  top: 38%;
+}
+
+.img-footer {
+  font-family: 'Martel', serif;
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  color: black;
+  transform: translate(-50%, -50%);
+}
+
+.compose-ticket {
+  margin: 22px;
+}
+
+.new-ticket {
+  margin: 30px auto 20px auto;
+  width: min-content;
+}

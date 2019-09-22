@@ -1,0 +1,15 @@
+.wrapper {
+  margin: 15px auto 0;
+  text-align: right;
+}
+
+.my-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.first-col {
+  padding-right: 10px;
+}
+

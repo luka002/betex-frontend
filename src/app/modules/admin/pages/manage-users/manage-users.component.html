@@ -1,0 +1,16 @@
+<div class="container-fluid card card-style">
+  <div class="card-body">
+    <h4>Users: {{userCount}}</h4>
+    <betex-manage-users-table
+      [page]="page"
+      (editUser)="onEditUser($event)"
+      (deleteUser)="onDeleteUser($event)"
+    ></betex-manage-users-table>
+
+    <betex-manage-users-pagination
+      [page]="page"
+      (getUsers)="getUsers($event)"
+      (setUsername)="setUsername($event)"
+    ></betex-manage-users-pagination>
+  </div>
+</div>

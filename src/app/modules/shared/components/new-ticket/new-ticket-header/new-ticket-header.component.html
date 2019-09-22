@@ -1,0 +1,35 @@
+<div class="my-header">
+  <mat-button-toggle-group #group="matButtonToggleGroup"
+                           [appearance]="'legacy'"
+                           (change)="onToggleChange($event)">
+    <mat-button-toggle [value]="ticketType.REGULAR"
+                       [class.tab-selected]="selectedTab === ticketType.REGULAR">
+      Regular
+    </mat-button-toggle>
+    <mat-button-toggle [value]="ticketType.DAILY"
+                       [class.tab-selected]="selectedTab === ticketType.DAILY">
+      Daily
+    </mat-button-toggle>
+    <mat-button-toggle [value]="ticketType.PREMIUM"
+                       [class.tab-selected]="selectedTab === ticketType.PREMIUM">
+      Premium
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <button mat-icon-button class="no-outline" [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</div>
+
+<!--Menu-->
+<mat-menu #menu="matMenu">
+  <button class="no-outline" mat-menu-item (click)="onToggleStatus()">
+    Toggle Status
+  </button>
+  <button class="no-outline" mat-menu-item (click)="onClear()">
+    Clear
+  </button>
+  <button class="no-outline" mat-menu-item (click)="onClose()">
+    Close
+  </button>
+</mat-menu>

@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div class="row justify-content-center" *ngIf="tips && tips.length > 0; else emptyState">
+    <div class="col-xl-9 col-lg-11 col-sm-11 col-11" [style.padding]="0">
+      <betex-tips-table-mobile
+        *ngIf="responsiveService.isMobile()"
+        [tips]="tips"
+        [isTicketShown]="isTicketShown"
+        [isUserAdmin]="isUserAdmin"
+        [isHistoryTable]="isHistoryTable"
+        (downloadImage)="getImage()"
+        (updateTip)="updateTip.emit($event)"
+        (addToTicket)="addToTicket($event)"
+        (fillImageData)="fillImageData($event)"
+      ></betex-tips-table-mobile>
+
+      <betex-tips-table-desktop
+        *ngIf="!responsiveService.isMobile()"
+        [tips]="tips"
+        [isTicketShown]="isTicketShown"
+        [isUserAdmin]="isUserAdmin"
+        [isPremiumTable]="isPremiumTable"
+        [isHistoryTable]="isHistoryTable"
+        (downloadImage)="getImage()"
+        (updateTip)="updateTip.emit($event)"
+        (addToTicket)="addToTicket($event)"
+        (fillImageData)="fillImageData($event)"
+      ></betex-tips-table-desktop>
+
+      <ng-container *ngIf="isUserAdmin">
+        <div class="new-ticket">
+          <betex-new-ticket
+            *ngIf="isTicketShown"
+            [tipsList]="ticketTips"
+            [showErrorAlert]="showErrorAlert"
+            [showSuccessAlert]="showSuccessAlert"
+            [loading]="loading"
+            (createTicket)="onCreateTicket($event)"
+            (closeTicket)="closeTicket()"
+            (clearTicket)="clearTicket()"
+            (removeTipFormTicket)="removeTipFromTicket($event)"
+          ></betex-new-ticket>
+        </div>
+
+        <div class="text-center">
+          <button *ngIf="!isTicketShown"
+                  class="btn btn-dark compose-ticket"
+                  (click)="showTicket()">
+            Compose Ticket
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!--Image to download-->
+<div #imageToDownload *ngIf="isUserAdmin" class="img-container">
+  <div *ngIf="!imgData.isPremium">
+    <h1 class="martel-font img-title">BETex</h1>
+    <img *ngIf="!imgData.win" src="../../../../../assets/images/img-download/free.png" alt="free">
+    <img *ngIf="imgData.win" src="../../../../../assets/images/img-download/free_win.jpeg" alt="free_win">
+    <h3 class="img-footer"><strong>Please like & follow</strong></h3>
+  </div>
+  <div *ngIf="imgData.isPremium">
+    <img *ngIf="!imgData.win" src="../../../../../assets/images/img-download/premium.jpeg" alt="premium">
+    <img *ngIf="imgData.win" src="../../../../../assets/images/img-download/premium_win.jpeg" alt="premium_win">
+    <h3 class="img-footer"><strong>Please like & follow</strong></h3>
+  </div>
+  <h2 class="img-body img-tip" [innerHTML]="imgData.body"></h2>
+</div>
+
+<ng-template #emptyState>
+  <div class="martel-font text-center">
+    <h1>No tips available at the moment</h1>
+  </div>
+</ng-template>

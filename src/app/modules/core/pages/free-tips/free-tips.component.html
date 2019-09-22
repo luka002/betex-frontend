@@ -1,0 +1,13 @@
+<h1 class="martel-font center-text">BETex</h1>
+
+<betex-tips-table
+  [tips]="tips"
+  [isUserAdmin]="user.isAdmin"
+  [isHistoryTable]="false"
+  [isPremiumTable]="false"
+  [showSuccessAlert]="showSuccessAlert"
+  [showErrorAlert]="showErrorAlert"
+  [loading]="loading"
+  (updateTip)="updateTip($event)"
+  (createTicket)="createTicket($event[0], $event[1])"
+></betex-tips-table>

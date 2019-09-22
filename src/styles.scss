@@ -1,0 +1,85 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~material-design-icons/iconfont/material-icons.css';
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.ng-sidebar__content.ng-sidebar__content--animate {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+.mat-button-toggle button:focus {
+  outline: none !important;
+}
+
+.ng-sidebar__backdrop {
+  z-index: 150 !important;
+}
+
+aside {
+  z-index: 200 !important;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.martel-font {
+  font-family: 'Martel', serif;
+  font-weight: bold;
+  font-size: 70px;
+  color: #2d2d2d;
+}
+
+.fill-row {
+  width: 100%;
+}
+
+.no-outline:focus,
+.no-outline:active:focus,
+.no-outline.active:focus {
+  outline: none;
+}
+
+.pair {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+  width: 100%;
+  color: #282828;
+  border: none;
+  border-collapse: collapse;
+
+  th {
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  td {
+    padding: 8px;
+    background: rgba(0, 0, 0, .0);
+    border-collapse: collapse;
+  }
+
+  tr:hover {
+    background-color: rgba(0, 0, 0, .0) !important;
+  }
+}
+
+.free-border td {
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.vip-border td {
+  border-bottom: 1px solid #a88538;
+  border-top: 1px solid #a88538;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  box-shadow: none;
+}

@@ -1,0 +1,25 @@
+<div class="user-container" *ngIf="!userSaved">
+  <betex-user
+    [user]="newUser"
+    [formType]="formType"
+    [loading]="loading"
+    [formSubmitted]="formSubmitted"
+    [userSaved]="userSaved"
+    [socialAuthError]="socialAuthError"
+    [socialAuthFailMessage]="socialAuthFailMessage"
+    (saveUser)="registerUser($event)"
+    (signUpWithGoogle)="onSignUpWithGoogle()"
+    (signUpWithFacebook)="onSignUpWithFacebook()"
+  ></betex-user>
+</div>
+
+<div *ngIf="formSubmitted && userSaved" class="container alert alert-success my-alert">
+  <h6>
+    You have successfully registered. To activate your account please go to your
+    email and click on the link that we have sent you.
+  </h6>
+  <br>
+  <h4>
+    <strong>NOTE*</strong>  Please check your <strong>spam folder</strong> if you don't see the email!
+  </h4>
+</div>

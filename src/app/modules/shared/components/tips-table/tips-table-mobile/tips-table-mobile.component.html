@@ -1,0 +1,38 @@
+<mat-accordion displayMode="'flat'"
+               [multi]="true">
+  <virtual-scroller #scroll [items]="tips"
+                    [parentScroll]="scroll.window"
+                    [bufferAmount]="5"
+                    [enableUnequalChildrenSizes]="true"
+                    (scroll)="invalidateMeasurements()">
+    <mat-expansion-panel *ngFor="let tip of scroll.viewPortItems" [expanded]="isExpanded.get(tip.id)">
+      <mat-expansion-panel-header [ngClass]="{'pad-lef-0': isUserAdmin}" (click)="onPanelTap(tip)">
+        <betex-tips-table-row-menu
+          *ngIf="isUserAdmin"
+          [isTicketShown]="isTicketShown"
+          [tip]="tip"
+          [isHistory]="isHistoryTable"
+          (addToTicket)="addToTicket.emit($event)"
+          (updateTip)="updateTip.emit($event)"
+          (downloadImage)="downloadImage.emit()"
+          (fillImageData)="fillImageData.emit(tip)"
+        ></betex-tips-table-row-menu>
+        <div>
+          <strong>
+            {{tip.teamHome}} - {{tip.teamAway}}
+          </strong>
+        </div>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <ul>
+          <li>Result: {{tip.result ? tip.result : '-'}}</li>
+          <li>Date: {{tip.time | date:'d/M/yy'}}</li>
+          <li>Time(UTC+0): {{tip.time | date:'H:mm'}}</li>
+          <li>League: {{tip.league}}</li>
+          <li>Bet: {{tip.bet}}</li>
+          <li>Odds: {{tip.odds}}</li>
+        </ul>
+      </ng-template>
+    </mat-expansion-panel>
+  </virtual-scroller>
+</mat-accordion>
